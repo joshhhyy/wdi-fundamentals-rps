@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////
 /*   Provided Code - Please Don't Edit   */
 ////////////////////////////////////////////////
-'use strict';
+//'use strict';
 
 function getInput() {
     console.log("Please choose either 'rock', 'paper', or 'scissors'.")
@@ -77,30 +77,32 @@ function playToFive() {
     console.log("Let's play Rock, Paper, Scissors");
     var playerWins = 0;
     var computerWins = 0;
-    console.log('Player chose ' + playerMove + '. While Computer chose ' +  computerMove);
-    switch (winner) {
-        case 'player':
-            playerWins += 1;
-            break;
-            
-        case 'computer':
-            computerWins += 1;
-            break;
-            
-        default:
-            console.log('No one is a winner')
-            break;
-    }
-    if (playerWins === 5) {
-        console.log('Player has beaten Computer in a first-to-five')
-    } else if (computerWins ===5) {
-        console.log('Computer has beaten player in a first-to-five ')
-    } else {
-        console.log('The score is currently ' + playerWins + ' to ' + computerWins);
+    while ((playerWins < 5) && (computerWins < 5)) {
+        var playerMove = getPlayerMove(getInput());
+        var computerMove = getComputerMove(randomPlay());
+        //seperate console.logs for improved readability in console
+        console.log(' ')
+        console.log('Player chose: ' + playerMove);
+        console.log('Computer chose: ' + computerMove);
+        console.log(' ')
         
-	getInput()
-         
+        
+        if (getWinner(playerMove, computerMove) == 'computer') {
+            computerWins += 1;
+            console.log('Computer wins this round!');
+        } else if (getWinner(playerMove, computerMove) == 'player') {
+            playerWins += 1;
+            console.log('Player wins this round!');
+        } else {
+            console.log('No one wins this round!');
+        }
+        console.log ('The score is currently: ' + [playerWins, computerWins         ]);
+        
     }
-// UNFINISHED, looking for advice on how to get this working
-    return [playerWins, computerWins];
+    if (playerWins == 5) {
+        return console.log ('  Player is the winner!')
+    } else if (computerWins == 5)  {
+        return console.log('  Computer is the winner!')
+    }
 }
+playToFive()
